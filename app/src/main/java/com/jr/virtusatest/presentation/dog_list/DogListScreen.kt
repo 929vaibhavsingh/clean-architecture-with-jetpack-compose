@@ -37,9 +37,10 @@ fun DogListScreen(
     viewModel: DogListViewModel
 ) {
     val state = viewModel.dogListState.collectAsStateWithLifecycle().value
-    Box(modifier = Modifier
-        .fillMaxSize()
-        .testTag(TEST_TAG_DOG_LIST_SCREEN)
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .testTag(TEST_TAG_DOG_LIST_SCREEN)
     ) {
         LazyColumn(
             modifier = Modifier
@@ -50,6 +51,7 @@ fun DogListScreen(
         ) {
             itemsIndexed(state.dogBreeds) { index, dogName ->
                 DogListItem(
+                    modifier = Modifier.fillMaxWidth(),
                     dogItemIndex = "${index + 1}",
                     dogName = dogName,
                     onItemClick = {
@@ -79,12 +81,13 @@ fun DogListScreen(
 
 @Composable
 fun DogListItem(
+    modifier: Modifier = Modifier,
     dogItemIndex: String,
     dogName: DogName,
     onItemClick: (String) -> Unit
 ) {
     Card(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier,
         shape = RoundedCornerShape(8.dp),
     ) {
         Row(
